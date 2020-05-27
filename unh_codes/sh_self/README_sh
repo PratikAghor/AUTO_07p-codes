@@ -1,0 +1,106 @@
+!---------------------------------------------------------------------- 
+!---------------------------------------------------------------------- 
+!  Muensteranian Torturials on Nonlinear Science
+!  edited by Uwe Thiele, Oliver Kamps, Svetlana Gurevich
+!  (Center for Nonlinear Science, Universitaet Muenster)
+!----------------------------------------------------------------------
+!  Section: Continuation with auto07p
+!  Tutorial: SH and SHPER: Steady states of the Swift-Hohenberg equation
+!  by Uwe Thiele (www.uwethiele.de), supported by Frank Lengers
+!  Version 1, October 2015
+!  for complete set of files and up to date version see
+!  www.uni-muenster.de/CeNoS/Lehre/Tutorials
+!----------------------------------------------------------------------
+!  File: README_sh - Further details and screen output for runs with 
+!  auto07p of sh.f90 producing steady homogeneous and periodic states
+!  for the Swift-Hohenberg equation
+!----------------------------------------------------------------------
+!----------------------------------------------------------------------
+
+General
+-------
+sh.f90 - uses auto07 mode IPS=1 (algebraic solutions) and IPS=2 (periodic states) -> can not handle localised states
+-> for another way to get periodic states and localised states see shper.f90
+tested on auto07p version 0.9.1
+Here the shell command line commands and screen output are given.
+See accompanying 09SH.pdf for alternative Python interface commands and 
+detailed description of the tutorial
+
+Commands and screen ouput
+-------------------------
+
+run 1
+-----
+check in sh.f90 that starting values of parameters are:
+       EPS= 0.0
+       RR = 0.4
+       QQ = 0.5  ! wavenumber at onset, value as BuKn06
+       VV = 0.41  ! prefactor of quadratic nonlinearity, value as BuKn06
+       GG = 1.0  ! prefactor of cubic nonlinearity, value as BuKn06
+
+follow steady states as solution of algebraic problem
+@cl
+@@R sh 1
+@sv sh1
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)      U(1)          U(2)          U(3)          U(4)     
+   1     1  EP    1   4.00000E-01   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00
+   1  6669  UZ    2   1.99980E-01   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00
+   1  1253  BP    3   6.24900E-02   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00
+   1  3336  HB    4  -4.00001E-08   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00
+   1     4  UZ    5  -2.00010E-01   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)      U(1)          U(2)          U(3)          U(4)     
+   2  3822  HB    6   1.14629E-01  -1.01846E-01  -1.01846E-01   0.00000E+00   0.00000E+00   0.00000E+00
+   2  8651  UZ    7   2.00006E-01  -2.18711E-01  -2.18711E-01   0.00000E+00   0.00000E+00   0.00000E+00
+   2  7915  UZ    8   4.00012E-01  -4.11066E-01  -4.11066E-01   0.00000E+00   0.00000E+00   0.00000E+00
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)      U(1)          U(2)          U(3)          U(4)     
+   2  7026  LP    9   2.04750E-02   2.05017E-01   2.05017E-01   0.00000E+00   0.00000E+00   0.00000E+00
+   2   445  HB   10   3.08498E-02   3.06857E-01   3.06857E-01   0.00000E+00   0.00000E+00   0.00000E+00
+   2  2695  UZ   11   2.00015E-01   6.28722E-01   6.28722E-01   0.00000E+00   0.00000E+00   0.00000E+00
+   2  1959  UZ   12   4.00023E-01   8.21075E-01   8.21075E-01   0.00000E+00   0.00000E+00   0.00000E+00
+
+-> does detect hopf bifurcation to periodic states at LAB4, LAB6, LAB10. LAB4 and LAB6 will be of interest here. LAB10 results in a branch up to r=infinity and is not considered here. 
+
+run 11
+------
+follow branch of periodic solutions starting at Hopf point LAB4 of sh1
+@@R sh 11 sh1
+@sv sh11
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)         e           PERIOD    
+   4    74  LP   13  -1.67054E-02   1.24084E-01   2.16467E-01   8.07444E-02   3.39006E-02   2.26819E-02   1.82468E-16   1.25664E+01
+   4   127  UZ   14  -5.11393E-07   2.15817E-01   3.75838E-01   1.35790E-01   5.87378E-02   3.82999E-02   2.40779E-16   1.25664E+01
+   4   233  UZ   15   9.99999E-02   3.75708E-01   6.17132E-01   2.34887E-01   1.27099E-01   8.11063E-02   1.48188E-16   1.25664E+01
+   4   317  UZ   16   2.00000E-01   4.79256E-01   7.40869E-01   3.09883E-01   1.96610E-01   1.36091E-01  -4.16835E-16   1.25664E+01
+   4   402  LP   17   2.99253E-01   5.65786E-01   8.22022E-01   3.69418E-01   2.71404E-01   2.00234E-01  -3.86961E-16   1.25664E+01
+   4   488  UZ   18   2.00000E-01   4.85359E-01   7.18561E-01   2.64816E-01   1.94504E-01   1.32335E-01   1.44698E-16   1.25664E+01
+   4   500       19   1.85767E-01   4.72664E-01   7.01848E-01   2.50118E-01   1.82533E-01   1.22483E-01  -8.11421E-16   1.25664E+01
+   4   580  UZ   20   9.99996E-02   3.88549E-01   5.75581E-01   1.52524E-01   1.03924E-01   6.22644E-02  -3.51694E-16   1.25664E+01
+   4   704  LP   21   3.08471E-02   3.06843E-01   3.06903E-01   2.99199E-05   1.49612E-05   7.47990E-06   7.23394E-13   1.25664E+01
+   4   828  UZ   22   9.99996E-02   3.88549E-01   5.75587E-01   1.52523E-01   1.03931E-01   6.22652E-02   8.93377E-16   1.25664E+01
+   4   920  UZ   23   2.00000E-01   4.85359E-01   7.18567E-01   2.64808E-01   1.94505E-01   1.32340E-01   1.18267E-17   1.25664E+01
+   4  1000  EP   24   2.96409E-01   5.63922E-01   8.18054E-01   3.63828E-01   2.69682E-01   1.98364E-01   3.60741E-15   1.25664E+01
+
+------
+follow branch of periodic solutions starting at Hopf point LAB10 of sh1 and compare with the branch obtained by run 11
+@@R sh 12 sh1
+@sv sh12
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)         e           PERIOD    
+  10    53  UZ   13   9.99974E-02   3.88546E-01   5.75586E-01   1.52517E-01   1.03927E-01   6.22613E-02   1.41398E-15   1.25661E+01
+  10    90  UZ   14   1.99999E-01   4.85355E-01   7.18568E-01   2.64803E-01   1.94504E-01   1.32335E-01   8.97290E-17   1.25661E+01
+  10   125  LP   15   2.99263E-01   5.65779E-01   8.22083E-01   3.69517E-01   2.71399E-01   2.00238E-01   1.12101E-15   1.25661E+01
+  10   159  UZ   16   2.00000E-01   4.79253E-01   7.40874E-01   3.09890E-01   1.96611E-01   1.36092E-01  -5.60876E-16   1.25661E+01
+  10   193  UZ   17   9.99986E-02   3.75706E-01   6.17132E-01   2.34889E-01   1.27101E-01   8.11093E-02  -6.61449E-16   1.25661E+01
+  10   236  UZ   18  -1.44468E-06   2.15814E-01   3.75842E-01   1.35794E-01   5.87396E-02   3.83019E-02   3.70793E-16   1.25661E+01
+  10   257  LP   19  -1.67053E-02   1.24081E-01   2.16462E-01   8.07428E-02   3.39018E-02   2.26831E-02  -1.39753E-17   1.25661E+01
+  10   286  LP   20   7.76602E-11   2.95248E-06   4.17530E-06   2.08774E-06   1.04387E-06   5.21951E-07   4.48076E-16   1.25661E+01
+  10   287  LP   21   6.27157E-11   3.49020E-06   4.93574E-06   2.46798E-06   1.23398E-06   6.17012E-07   7.11383E-17   1.25661E+01
+  10   316  LP   22  -1.67053E-02   1.24078E-01   2.16456E-01   8.07409E-02   3.39011E-02   2.26817E-02  -1.03092E-16   1.25661E+01
+  10   337  UZ   23  -6.13633E-11   2.15818E-01   3.75843E-01   1.35795E-01   5.87416E-02   3.83011E-02   1.12116E-16   1.25661E+01
+  10   380  UZ   24   9.99999E-02   3.75707E-01   6.17123E-01   2.34880E-01   1.27098E-01   8.11129E-02   1.12833E-17   1.25661E+01
+  10   400  EP   25   1.59164E-01   4.39719E-01   6.96700E-01   2.80131E-01   1.67487E-01   1.12161E-01  -3.17995E-16   1.25661E+01
+
+
