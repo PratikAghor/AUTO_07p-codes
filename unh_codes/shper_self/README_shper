@@ -1,0 +1,183 @@
+!---------------------------------------------------------------------- 
+!---------------------------------------------------------------------- 
+!  Muensteranian Torturials on Nonlinear Science
+!  edited by Uwe Thiele, Oliver Kamps, Svetlana Gurevich
+!  (Center for Nonlinear Science, Universitaet Muenster)
+!----------------------------------------------------------------------
+!  Section: Continuation with auto07p
+!  Tutorial: SH and SHPER: Steady states of the Swift-Hohenberg equation
+!  by Uwe Thiele (www.uwethiele.de), supported by Frank Lengers
+!  Version 1, October 2015
+!  for complete set of files and up to date version see
+!  www.uni-muenster.de/CeNoS/Lehre/Tutorials
+!----------------------------------------------------------------------
+!  File: README_shper - Further details and screen output for runs with 
+!  auto07p of shper.f90 producing steady periodic and localized states
+!  for the Swift-Hohenberg equation
+!----------------------------------------------------------------------
+!----------------------------------------------------------------------
+
+General
+-------
+shper.f90 - uses auto07 mode IPS=4 (BVP) to get periodic states and localised states
+-> for another way to get homogeneous and periodic states see sh.f90
+tested on auto07p version 0.9.1
+Here the shell command line commands and screen output are given.
+See accompanying 09SH.pdf for alternative Python interface commands and detaileddescription of the tutorial.
+
+Commands and screen output
+--------------------------
+
+run 1
+-----
+check in shper.f90 that starting values of parameters are:
+       PHI0 = 0.0 ! starting value of PHI
+       EPS= 0.0
+       RR = 0.05
+       QQ = 0.5  ! wavenumber at onset, value as BuKn06
+       VV = 0.41  ! prefactor of quadratic nonlinearity, value as BuKn06
+       GG = 1.0  ! prefactor of cubic nonlinearity, value as BuKn06
+       FPHI0  = -VV*PHI0**2 +GG*PHI0**3
+       FPHIPHI0  = -2.0*VV*PHI + 3.0*GG*PHI**2
+       MU = PHI0*(RR-QQ**4)-FPHI0 ! starting integration constant
+
+follow a given solution for a steady localized state (shper_1.dat) and change r (PAR(3))
+@@R shper 1
+@sv shper1
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)         e       
+   1     1  EP    1  -1.24500E-02   3.68903E-02   2.30475E-01   7.89238E-02   2.90829E-02   2.29627E-02   0.00000E+00
+   1    35  BP    2  -4.64656E-04   1.07298E-02   1.67989E-02   7.98135E-03   3.91531E-03   2.02278E-03   7.92961E-17
+   1    37  BP    3  -4.77446E-04   1.07842E-02   1.84370E-02   8.70107E-03   4.24837E-03   2.20391E-03  -8.02054E-18
+   1    81  LP    4  -1.17342E-02   3.64478E-02   2.30046E-01   7.88619E-02   2.91371E-02   2.31867E-02  -2.34559E-16
+   1    85  LP    5  -1.16346E-02   4.07843E-02   2.51102E-01   8.59485E-02   3.18210E-02   2.50858E-02  -1.24628E-16
+   1    87  BP    6  -1.16874E-02   4.22534E-02   2.55524E-01   8.76677E-02   3.25431E-02   2.55089E-02  -1.09380E-16
+   1   103  BP    7  -1.45224E-02   5.65730E-02   2.56010E-01   9.22254E-02   3.65229E-02   2.62046E-02  -3.69715E-16
+   1   104  LP    8  -1.45332E-02   5.75107E-02   2.57629E-01   9.28846E-02   3.68800E-02   2.63654E-02   6.01014E-17
+   1   117  LP    9  -1.24478E-02   7.37952E-02   2.95242E-01   1.06134E-01   4.29906E-02   2.96560E-02   1.94969E-16
+   1   118  BP   10  -1.24478E-02   7.38005E-02   2.95243E-01   1.06134E-01   4.29911E-02   2.96569E-02  -2.87518E-16
+   1   134  BP   11  -1.46469E-02   7.92802E-02   2.71784E-01   9.89701E-02   4.07274E-02   2.78028E-02  -9.17002E-17
+   1   135  LP   12  -1.46469E-02   7.92917E-02   2.71787E-01   9.89714E-02   4.07283E-02   2.78031E-02  -1.64874E-16
+   1   150  EP   13  -1.24520E-02   9.55328E-02   2.98126E-01   1.07592E-01   4.42203E-02   2.99707E-02   1.77169E-16
+
+run 11
+-----
+switch branches (ISW=-1) at LAB10  
+@@R shper 11 shper1
+@sv shper11
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)         e       
+   2    26  LP   14  -1.46343E-02   6.88669E-02   2.64063E-01   9.66756E-02   4.01912E-02   2.71074E-02  -4.31843E-17
+   2    30  EP   15  -1.44232E-02   6.94007E-02   2.69688E-01   9.70983E-02   4.05322E-02   2.75868E-02   7.69145E-17
+
+run 2
+-----
+follow a given solution for a steady localized state (shper_2.dat) and change r (PAR(3))
+@@R shper 2
+@sv shper2
+
+  BR    PT  TY  LAB       r        L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)         e       
+   1     1  EP    1  -1.24500E-02   5.75054E-02   2.71784E-01   9.89061E-02   4.11882E-02   2.73649E-02   0.00000E+00
+   1    20  LP    2  -1.39479E-02   4.65837E-02   2.21531E-01   8.26426E-02   3.49154E-02   2.30711E-02  -4.54444E-16
+   1   144  LP    3  -1.39479E-02   4.65859E-02   2.21541E-01   8.26463E-02   3.49168E-02   2.30720E-02  -2.75561E-16
+   1   155  LP    4  -1.23954E-02   6.00087E-02   2.76310E-01   1.00565E-01   4.16962E-02   2.79865E-02   2.93765E-16
+   1   171  LP    5  -1.46344E-02   6.89665E-02   2.64170E-01   9.67114E-02   4.02044E-02   2.71167E-02   1.25828E-16
+   1   185  LP    6  -1.24517E-02   8.53596E-02   2.96685E-01   1.07169E-01   4.41284E-02   2.98445E-02   2.13672E-16
+   1   200  EP    7  -1.46399E-02   8.79457E-02   2.72705E-01   9.94992E-02   4.12419E-02   2.79068E-02   5.89403E-17
+
+run 3
+-----
+check in shper.f90 that starting values of parameters are:
+       PHI0 = 0.0 ! starting value of PHI
+       EPS= 0.0
+       RR = 0.05
+       QQ = 0.5  ! wavenumber at onset, value as BuKn06
+       VV = 0.41  ! prefactor of quadratic nonlinearity, value as BuKn06
+       GG = 1.0  ! prefactor of cubic nonlinearity, value as BuKn06
+       FPHI0  = -VV*PHI0**2 +GG*PHI0**3
+       FPHIPHI0  = -2.0*VV*PHI + 3.0*GG*PHI**2
+       MU = PHI0*(RR-QQ**4)-FPHI0 ! starting integration constant
+       NN = 1.0
+       PER   = NN*TPI/SQRT(QQ**2+SQRT(RR-FPHIPHI0))  ! k+
+
+follow steady states as solution of boundary value problem, starting at L+
+change domain size L (PAR5), let EPS (PAR2) adapt, other parameters (including RR) fixed
+@cl
+@@R shper 3
+@sv shper3
+
+  BR    PT  TY  LAB    PAR(5)      L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)      PAR(2)        PAR(1)     
+   1     1  EP    1   9.13000E+00   7.07107E-09   1.00000E-08   6.28319E-08   3.94784E-07   2.48050E-06   0.00000E+00   0.00000E+00
+   1   142  UZ    2   9.00000E+00   1.40878E-02   1.99500E-02   1.39094E-02   9.65720E-03   6.78158E-03  -2.09202E-15   8.35323E-03
+   1   451  LP    3   8.69779E+00   9.63015E-06   1.36190E-05   9.83824E-06   7.10701E-06   5.13405E-06  -1.74057E-15   3.31716E-02
+   1   500        4   8.74203E+00   1.14185E-02   1.61610E-02   1.16063E-02   8.31443E-03   5.99645E-03  -3.06084E-15   2.89962E-02
+   1   760  UZ    5   9.00000E+00   1.40878E-02   1.99499E-02   1.39093E-02   9.65717E-03   6.78158E-03  -2.31744E-15   8.35323E-03
+   1   895  LP    6   9.13000E+00   5.24214E-06   7.41344E-06   5.10191E-06   3.51104E-06   2.41629E-06  -1.81011E-15   9.01345E-10
+   1  1000  EP    7   9.02812E+00   1.27784E-02   1.80940E-02   1.25772E-02   8.70838E-03   6.09364E-03  -2.61971E-15   6.44317E-03
+
+run 4 
+-----
+check in shper.f90 that starting values of parameters are:
+       PHI0 = 0.0 ! starting value of PHI
+       EPS= 0.0
+       RR = 0.05
+       QQ = 0.5  ! wavenumber at onset, value as BuKn06
+       VV = 0.41  ! prefactor of quadratic nonlinearity, value as BuKn06
+       GG = 1.0  ! prefactor of cubic nonlinearity, value as BuKn06
+       FPHI0  = -VV*PHI0**2 +GG*PHI0**3
+       FPHIPHI0  = -2.0*VV*PHI + 3.0*GG*PHI**2
+       MU = PHI0*(RR-QQ**4)-FPHI0 ! starting integration constant
+       NN = 1.0
+       PER   = NN*TPI/SQRT(QQ**2-SQRT(RR-FPHIPHI0))  ! k-
+
+follow steady states as solution of boundary value problem, starting at L-
+change domain size L (PAR5), let EPS (PAR2) adapt, measure mean PHI (PAR1)
+other parameters (including RR) fixed
+@cl
+@@R shper 4
+@sv shper4
+
+  BR    PT  TY  LAB    PAR(5)      L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)      PAR(2)        PAR(1)     
+   1     1  EP    1   3.86753E+01   7.07107E-09   1.00000E-08   6.28319E-08   3.94784E-07   2.48050E-06   0.00000E+00   0.00000E+00
+   1   500        2   4.33996E+01   1.05950E-02   1.32516E-02   2.30753E-03   5.10221E-04   9.54929E-05  -5.75479E-16   4.15508E-03
+   1   693  LP    3   4.52841E+01   1.18101E-02   1.79697E-02   6.78857E-03   3.36166E-03   2.19132E-03  -2.23049E-16   5.35594E-03
+   1   730  LP    4   4.52344E+01   1.17095E-02   1.65865E-02   1.15026E-02   7.94907E-03   5.54886E-03   1.49470E-17   5.20220E-03
+   1  1000        5   4.72310E+01   1.29548E-02   1.55956E-02   2.66177E-03   6.77877E-04   1.31457E-04  -1.08897E-15   6.77311E-03
+   1  1277  UZ    6   5.00000E+01   1.39868E-02   1.63473E-02   2.86006E-03   6.97481E-04   1.35454E-04  -8.06860E-16   8.35980E-03
+   1  1500        7   5.22300E+01   1.45842E-02   1.67199E-02   2.99487E-03   6.85860E-04   1.44177E-04  -8.37023E-16   9.49157E-03
+   1  1677  LP    8   5.39642E+01   1.48400E-02   2.37228E-02   8.86290E-03   4.59868E-03   3.02433E-03   8.04465E-17   9.97844E-03
+   1  1712  LP    9   5.39301E+01   1.45415E-02   2.05979E-02   1.43761E-02   9.99301E-03   7.02733E-03   1.41038E-15   9.16164E-03
+   1  1736  LP   10   5.39642E+01   1.48406E-02   2.36932E-02   8.83416E-03   4.57620E-03   3.00835E-03   4.50780E-16   9.98034E-03
+   1  2000  EP   11   5.15041E+01   1.44080E-02   1.66097E-02   2.94651E-03   6.96170E-04   1.39424E-04  -7.04889E-16   9.13621E-03
+
+run 5
+-----
+check in shper.f90 that starting values of parameters are:
+       PHI0 = 0.0 ! starting value of PHI
+       EPS= 0.0
+       RR = 0.05
+       QQ = 0.5  ! wavenumber at onset, value as BuKn06
+       VV = 0.41  ! prefactor of quadratic nonlinearity, value as BuKn06
+       GG = 1.0  ! prefactor of cubic nonlinearity, value as BuKn06
+       FPHI0  = -VV*PHI0**2 +GG*PHI0**3
+       FPHIPHI0  = -2.0*VV*PHI + 3.0*GG*PHI**2
+       MU = PHI0*(RR-QQ**4)-FPHI0 ! starting integration constant
+       NN = 6.0
+       PER   = NN*TPI/SQRT(QQ**2+SQRT(RR-FPHIPHI0))  ! k+
+
+follow steady states as solution of boundary value problem
+change domain size L (PAR5), let EPS (PAR2) adapt, measure mean PHI (PAR1)
+other parameters (including RR) fixed
+@cl
+@@R shper 5 
+@sv shper5
+
+  BR    PT  TY  LAB    PAR(5)      L2-NORM U(1)    MAX U(1)      MAX U(2)      MAX U(3)      MAX U(4)      PAR(2)        PAR(1)     
+   1     1  EP    1   5.47800E+01   7.07107E-09   1.00000E-08   3.76991E-07   1.42122E-05   5.35789E-04   0.00000E+00   0.00000E+00
+   1   300        2   5.33209E+01   1.65909E-02   2.34959E-02   1.65894E-02   1.16620E-02   8.29613E-03  -5.81745E-16   1.66784E-02
+   1   531  LP    3   5.21868E+01   4.91534E-05   6.95135E-05   5.02156E-05   3.62747E-05   2.62048E-05  -7.00656E-16   3.31715E-02
+   1   600        4   5.24448E+01   1.12888E-02   1.59775E-02   1.14762E-02   8.22272E-03   5.93060E-03  -6.61467E-16   2.91093E-02
+   1   900        5   5.39446E+01   1.44513E-02   2.04647E-02   1.42825E-02   9.92484E-03   6.97765E-03  -5.85559E-16   8.99303E-03
+   1  1070  LP    6   5.47800E+01   4.38997E-05   6.20838E-05   4.27254E-05   2.94023E-05   2.02350E-05  -6.64459E-16   6.32099E-08
+   1  1100  EP    7   5.47152E+01   4.41267E-03   6.24343E-03   4.29972E-03   2.95685E-03   2.04121E-03  -6.92477E-16   6.49440E-04
+  
