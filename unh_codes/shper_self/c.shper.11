@@ -1,7 +1,7 @@
 parnames = {3:'r', 2:'e'}
-NDIM=   4, IPS =   4, IRS =  6, ILP =   1
+NDIM=   4, IPS =   4, IRS =  2, ILP =   1
 ICP =  [3,2]
-NTST= 1000, NCOL=   4, IAD =   3, ISP =  1, ISW = -1, IPLT= 9, NBC= 4, NINT=1
+NTST= 1000, NCOL=   4, IAD =   3, ISP =  1, ISW = 1, IPLT= 9, NBC= 4, NINT=1
 NMX= 30, NPR=  500, MXBF=   10, IID =   3, ITMX= 8, ITNW= 5, NWTN= 3, JAC= 0
 EPSL= 1e-07, EPSU = 1e-07, EPSS = 1e-06
 DS  = 0.001, DSMIN= 1e-20, DSMAX= 0.004, IADS=   1
