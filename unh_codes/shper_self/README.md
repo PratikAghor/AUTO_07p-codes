@@ -4,4 +4,4 @@
 * To run the auto code and plot the snaking bifurcation diagram, do
 ```python3 run_shper.py```
 ```python3 plot_shper.py```
-
+![shper](shper.png)
