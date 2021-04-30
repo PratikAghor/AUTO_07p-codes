@@ -13,7 +13,7 @@ except ImportError:
 
 import matplotlib.pyplot as plt
 import auto.graphics
-from auto.graphics.plotter import plotter
+from auto.graphics.plotter import *
 from auto import parseB
 from auto import parseS
 from auto import parseC
@@ -46,3 +46,4 @@ from auto import AUTOCommands as ac
 fshper = plotter(bifurcation_diagram_filename="b.shper", stability=False, \
 AUTO_plotter="hide")
 grapher.GUIGrapher.generatePostscript(fshper)
+#############################################

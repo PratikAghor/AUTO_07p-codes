@@ -21,7 +21,7 @@ r2 = ac.run(e='shper', c='shper.2', sv='shper2', runner=runner);
 #ac.append('shper1')
 
 r = r1 + r2;
-ac.save(r, 'shper')
+ac.save(r, 'sh_shper')
 # run3
 # print("starting run3...")
 # r3 = ac.run(e='shper', c='shper.3', sv='shper3', runner=runner);
@@ -36,3 +36,4 @@ ac.save(r, 'shper')
 # ac.append('shper')
 # clean the directory
 ac.clean()
+#############################################
