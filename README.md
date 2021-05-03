@@ -16,3 +16,4 @@ ___________________________________________________
 * Trying to make auto codes work using python
 * ran ```sh1``` and ```sh11``` using ```sh.f```
 * have to figure out how to plot the bifurcation diagrams
+* Updated presentation made in the nonlinear dynamics course by Dr John Gibson at UNH
